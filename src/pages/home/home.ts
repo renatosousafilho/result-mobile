@@ -11,16 +11,11 @@ import { InAppBrowser } from 'ionic-native';
 export class HomePage {
 
   constructor( public platform: Platform,public navCtrl: NavController) {
-
-  }
-  openUrl() {
-        this.platform.ready().then(() => {
-            let browser = new InAppBrowser("https://demo.lazarus.bet",'_blank');
-            browser.on("loadstop").subscribe((event) => {
-              browser.executeScript({ code: "console.log('response');" });
-              browser.executeScript({ code: "$('#sidebar-right-button').click(function(){console.log('teste');});" });
-            });
-
-        });
+    this.platform.ready().then(() => {
+      let browser = new InAppBrowser("https://demo.lazarus.bet",'_blank', 'location=no');
+      browser.on("loadstop").subscribe((event) => {
+        browser.executeScript({ code: "$('#sidebar-right-button').click(function(){alert('teste');});" });
+      });
+    });
   }
 }
